@@ -8,7 +8,7 @@ public:
 	~avl_tree();
 	void insert(int key);
 	void remove(int key);
-	bool search(int key);
+	bool search(int key); // Change return type to bool
 	void print();
 private:
 	struct Node
@@ -21,7 +21,7 @@ private:
 	Node* root;
 	Node* insert(Node* node, int key);
 	Node* remove(Node* node, int key);
-	Node* search(Node* node, int key);
+	Node* search(Node* node, int key); // Remove duplicate declaration
 	std::string print(Node* node);
 	Node* rotateRight(Node* node);
 	Node* rotateLeft(Node* node);

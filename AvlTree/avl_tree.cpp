@@ -130,3 +130,62 @@ avl_tree::Node* avl_tree::balance(Node* node)
     return result;
     }
 
+	void avl_tree::remove(int key)
+	{
+		root = remove(root, key);
+	}
+
+	avl_tree::Node* avl_tree::remove(Node* node, int key)
+	{
+		if (node == nullptr)
+			return nullptr;
+		if (key < node->key)
+			node->left = remove(node->left, key);
+		else if (key > node->key)
+			node->right = remove(node->right, key);
+		else
+		{
+			Node* left = node->left;
+			Node* right = node->right;
+			delete node;
+			if (right == nullptr)
+				return left;
+			Node* min = findMin(right);
+			min->right = removeMin(right);
+			min->left = left;
+			return balance(min);
+		}
+		return balance(node);
+	}
+
+	avl_tree::Node* avl_tree::findMin(Node* node)
+	{
+		return node->left ? findMin(node->left) : node;
+	}
+
+	avl_tree::Node* avl_tree::removeMin(Node* node)
+	{
+		if (node->left == nullptr)
+			return node->right;
+		node->left = removeMin(node->left);
+		return balance(node);
+	}
+
+	bool avl_tree::search(int key)
+	{
+		Node* node = search(root, key);
+		return node != nullptr;
+	}
+
+	avl_tree::Node* avl_tree::search(Node* node, int key)
+	{
+		if (node == nullptr)
+			return nullptr;
+		if (key < node->key)
+			return search(node->left, key);
+		else if (key > node->key)
+			return search(node->right, key);
+		else
+			return node;
+	}
+

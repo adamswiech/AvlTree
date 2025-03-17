@@ -15,6 +15,10 @@ int main()
 	tree->print();
 
 	std::cout << std::endl;
+
+	bool exists = tree->search(3);
+	std::cout << "Exists: " << exists << std::endl;	
+
 	std::cin.get();
 
 	delete tree;
